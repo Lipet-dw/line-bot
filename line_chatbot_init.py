@@ -36,6 +36,13 @@ def callback():
 if __name__ == "__main__":
     app.run()
 
+@handler.add(PostbackEvent)
+def postback(event):
+    print("postback event: ",event)
+    line_bot_api.reply_message(
+            event.reply_token, 
+            TextSendMessage(text= str(event.postback)))
+    
 # 學你說話
 @handler.add(MessageEvent, message = TextMessage)
 def echo(event):
